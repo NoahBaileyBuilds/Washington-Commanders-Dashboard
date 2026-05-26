@@ -1,18 +1,28 @@
 const teamComparison = [
 	{
-		category: "Offense",
+		category: "Quarterback",
+		commanders: 88,
+		nfcEastAvg: 78
+	},
+	{
+		category: "Wide Receiver",
 		commanders: 80,
-		nfcEastAvg: 72
+		nfcEastAvg: 76
 	},
 	{
-		category: "Defense",
+		category: "Offensive Line",
+		commanders: 70,
+		nfcEastAvg: 74
+	},
+	{
+		category: "Pass Rush",
+		commanders: 72,
+		nfcEastAvg: 77
+	},
+	{
+		category: "Secondary",
 		commanders: 68,
-		nfcEastAvg: 70
-	},
-	{
-		category: "Special Teams",
-		commanders: 74,
-		nfcEastAvg: 69
+		nfcEastAvg: 75
 	}
 ];
 

@@ -2,17 +2,37 @@ const players = [
 	{
 		name: "Jayden Daniels",
 		position: "QB",
-		status: "Starter"
+		status: "Franchise QB"
 	},
 	{
 		name: "Terry McLaurin",
 		position: "WR",
-		status: "Starter"
+		status: "WR1"
 	},
 	{
-		name: "Lermey Tunsil",
-		position: "LT",
-		status: "Veteran Leader"
+		name: "Mike Sainristil",
+		position: "CB",
+		status: "Emerging Starter"
+	},
+	{
+		name: "Sonny Styles",
+		position: "LB",
+		status: "Hybrid Defender"
+	},
+	{
+		name: "Daron Payne",
+		position: "DT",
+		status: "Defensive Anchor"
+	},
+	{
+		name: "Frankie Luvu",
+		position: "LB",
+		status: "Impact Defender"
+	},
+	{
+		name: "Luke McCaffrey",
+		position: "WR",
+		status: "Developmental Weapon"
 	}
 ];
 

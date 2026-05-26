@@ -3,16 +3,28 @@ This code is for the Reusable stat cards.
 */
 const teamStats = [
 	{
-		title: "Offense Rank",
-		value: "#0"
+		title: "Projected Record",
+		value: "10-7"
 	},
 	{
-		title: "Defense Rank",
-		value: "#0"
+		title: "NFC East Rank",
+		value: "#2"
 	},
 	{
-		title: "Playoff Odds",
-		value: "0%"
+		title: "Playoff Outlook",
+		value: "Likely"
+	},
+	{
+		title: "Top Team Need",
+		value: "CB"
+	},
+	{
+		title: "Offense Trend",
+		value: "Rising"
+	},
+	{
+		title: "Defense Trend",
+		value: "Unproven"
 	}
 ];
 

@@ -1,24 +1,31 @@
 const tradeTargets = [
 	{
-		name: "Placeholder Player",
-		position: "WR",
+		name: "Cornerback Target",
+		position: "CB",
+		currentTeam: "TBD",
+		fit: "High",
+		cost: "Day 2 pick"
+	},
+	{
+		name: "Edge Rusher Target",
+		position: "EDGE",
 		currentTeam: "TBD",
 		fit: "High",
 		cost: "Mid-round pick"
 	},
 	{
-		name: "Placeholder Player",
-		position: "CB",
+		name: "Offensive Tackle Target",
+		position: "OT",
 		currentTeam: "TBD",
 		fit: "Medium",
 		cost: "Late-round pick"
 	},
 	{
-		name: "Placeholder Player",
-		position: "EDGE",
+		name: "Running Back Target",
+		position: "RB",
 		currentTeam: "TBD",
-		fit: "High",
-		cost: "Player + pick"
+		fit: "Medium",
+		cost: "Conditional pick"
 	}
 ];
 
