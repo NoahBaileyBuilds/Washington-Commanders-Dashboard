@@ -13,10 +13,9 @@
   - Potential trade targets
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import teamStats from "../data/teamStats";
-import players from "../data/players";
 import tradeTargets from "../data/tradeTargets";
 import teamComparison from "../data/teamComparison";
 
@@ -32,22 +31,44 @@ import DashboardLayout from "../components/DashboardLayout";
   Shows the title, description,
   and dynamically generated dashboard content.
 */
-
+type Player = {
+	name: string;
+	position: string;
+};
 export default function Home() {
 
 	/* Toggle Trade Targets */
 	const [showTrades, setShowTrades] = useState(true);
 
+	const [players, setPlayers] = useState<Player[]>([]);
+
 	/* Current selected roster filter */
 	const [selectedPosition, setSelectedPosition] = useState("All");
+	const [searchQuery, setSearchQuery] = useState("");
+
+	useEffect(() => {
+
+	fetch("http://localhost:8080/api/players")
+		.then((response) => response.json())
+		.then((data) => setPlayers(data));
+
+	}, []);
 
 	/* Dynamically filter roster players */
-	const filteredPlayers =
-		selectedPosition === "All"
-			? players
-			: players.filter(
-					(player) => player.position === selectedPosition
-			  );
+	const filteredPlayers = players.filter((player) => {
+
+		const matchesPosition =
+			selectedPosition === "All" ||
+			player.position === selectedPosition;
+
+		const matchesSearch =
+			player.name.toLowerCase().includes(
+				searchQuery.toLowerCase()
+			);
+
+		return matchesPosition && matchesSearch;
+
+	});
 
 	/* Automatically generate filter buttons from roster data */
 	const positionFilters = [
@@ -65,25 +86,25 @@ export default function Home() {
 	return (
 		<DashboardLayout>
 
-		{/* Dashboard Header */}
-		<section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+			{/* Dashboard Header */}
+			<section className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
-			<PageHeader
-				title="Washington Commanders Dashboard"
-				description="Team rankings, roster analysis, and trade targets."
-			/>
+				<PageHeader
+					title="Washington Commanders Dashboard"
+					description="Team rankings, roster analysis, and trade targets."
+				/>
 
-			<div className="rounded-2xl bg-gray-900 px-6 py-4 shadow-lg">
-				<p className="text-sm text-gray-400">
-					Season Outlook
-				</p>
+				<div className="rounded-2xl bg-gray-900 px-6 py-4 shadow-lg">
+					<p className="text-sm text-gray-400">
+						Season Outlook
+					</p>
 
-				<p className="text-2xl font-bold text-yellow-400">
-					2026
-				</p>
-			</div>
+					<p className="text-2xl font-bold text-yellow-400">
+						2026
+					</p>
+				</div>
 
-		</section>
+			</section>
 
 			{/* Dashboard Stat Cards */}
 			<div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -109,7 +130,13 @@ export default function Home() {
 				<h2 className="text-3xl font-bold text-yellow-400">
 					Roster Preview
 				</h2>
-
+				<input
+					type="text"
+					placeholder="Search players..."
+					value={searchQuery}
+					onChange={(event) => setSearchQuery(event.target.value)}
+					className="mt-6 w-full rounded-xl bg-gray-900 px-4 py-3 text-white outline-none ring-2 ring-transparent transition focus:ring-yellow-400"
+				/>
 				{/* Dynamic Position Filters */}
 				<div className="mt-6 flex flex-wrap gap-4">
 
@@ -126,18 +153,25 @@ export default function Home() {
 				</div>
 
 				{/* Filtered Player Cards */}
-				<div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{filteredPlayers.length > 0 ? (
+				filteredPlayers.map((player) => (
+					<PlayerCard
+						key={player.name}
+						name={player.name}
+						position={player.position}
+						status={player.status}
+					/>
+				))
 
-					{filteredPlayers.map((player) => (
-						<PlayerCard
-							key={player.name}
-							name={player.name}
-							position={player.position}
-							status={player.status}
-						/>
-					))}
+			) : (
 
+				<div className="rounded-2xl bg-gray-900 p-6 shadow-lg">
+					<p className="text-lg text-gray-300">
+						No matching players found.
+					</p>
 				</div>
+
+			)}
 
 			</section>
 
