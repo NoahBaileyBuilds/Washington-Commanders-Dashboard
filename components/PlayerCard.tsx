@@ -2,22 +2,49 @@ type PlayerCardProps = {
 	name: string;
 	position: string;
 	status: string;
+	jersey?: string;
+	headshot?: string;
 };
 
-export default function PlayerCard({ name, position, status }: PlayerCardProps) {
+export default function PlayerCard({
+	name,
+	position,
+	status,
+	jersey,
+	headshot
+}: PlayerCardProps) {
 	return (
-		<div className="rounded-2xl bg-gray-900 p-6 shadow-lg">
-			<p className="text-sm text-gray-400">
-				{position}
-			</p>
+		<div className="rounded-2xl bg-gray-900 p-4 shadow-lg">
 
-			<h3 className="mt-2 text-2xl font-bold text-white">
-				{name}
-			</h3>
+			<div className="flex items-center gap-4">
 
-			<p className="mt-4 text-yellow-400">
-				{status}
-			</p>
+				{headshot && (
+					<img
+						src={headshot}
+						alt={name}
+						className="rounded-full object-cover"
+						style={{ width: "180px", height: "180px" }}
+					/>
+				)}
+
+				<div className="min-w-0">
+
+					<p className="text-sm text-gray-400">
+						{position} {jersey && `#${jersey}`}
+					</p>
+
+					<h3 className="truncate text-xl font-bold text-white">
+						{name}
+					</h3>
+
+					<p className="mt-1 text-sm text-yellow-400">
+						{status}
+					</p>
+
+				</div>
+
+			</div>
+
 		</div>
 	);
 }
